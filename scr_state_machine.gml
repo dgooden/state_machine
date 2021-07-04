@@ -55,10 +55,11 @@ function DTGSM_StateMachine() constructor
 {
 	_curState = -1;
 	_curName = "";
+	_prevName = "";
 	_timeSince = 0;
 	_framesSince = 0;
 	_states = {};
-
+	
 	_timeStart = 0;
 	
 	
@@ -89,6 +90,13 @@ function DTGSM_StateMachine() constructor
 		variable_struct_set(_states,stateName,state);
 	}
 	
+	/// @function getPreviousName
+	/// @desc returns the name of the previous state
+	static getPreviousName = function()
+	{
+		return _prevName;
+	}
+	
 	/// @function getName
 	/// @desc returns the name of current state 
 	static getName = function()
@@ -111,6 +119,7 @@ function DTGSM_StateMachine() constructor
 		var newState = variable_struct_get(_states,stateName);
 		if ( _curState != -1 ) {
 			_curState.onExit();
+			_prevName = _curName;
 		}
 		_curState = newState;
 		_curName = stateName;
@@ -176,6 +185,7 @@ function DTGSM_StateMachine() constructor
 		_states = {};
 		_curState = -1;
 		_curName = "";
+		_prevName = "";
 		_timeSince = 0;
 		_framesSince = 0;
 	}
