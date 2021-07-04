@@ -9,7 +9,12 @@ function DTGSM_State() constructor
 	///@desc saves data as userData
 	static setUserData = function(data) 
 	{
-		_userData = data;
+		_userData = {};
+		var keys = variable_struct_get_names(data);
+		for ( var i=0; i<array_length(keys); i++ ) {
+			var key = keys[i];
+			variable_struct_set(_userData,key,variable_struct_get(data,key));
+		}
 	}
 	
 	///@function getUserData
