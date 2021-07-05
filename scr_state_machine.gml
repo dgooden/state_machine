@@ -149,7 +149,7 @@ function DTGSM_StateMachine() constructor
 		if ( sec ) {
 			return (t/1000000);
 		}
-		return t
+		return t;
 	}
 	
 	/// @function getUserData()
