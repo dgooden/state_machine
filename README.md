@@ -79,3 +79,16 @@ userData = stateMachine.getUserData();
 
 userData would then contain the data from the foo struct.
 
+### Time/Frames since enter state
+
+You can get the amount of time that has passed since the current state has been running.
+```gml
+timeInMicroseconds = stateMachine.getTime(false);
+
+timeInSeconds = stateMachine.getTime(true);
+```
+
+Also the number of frames since the state started.
+```gml
+frames = stateMachine.getFrames()
+```
