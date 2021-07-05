@@ -56,11 +56,12 @@ function DTGSM_StateMachine() constructor
 	_curState = -1;
 	_curName = "";
 	_prevName = "";
-	_timeSince = 0;
-	_framesSince = 0;
+
 	_states = {};
 	
-	_timeStart = 0;
+	_enterStateStartTime = 0;
+	_framesSince = 0;
+
 	
 	
 	/// @function add(stateName,state)
@@ -123,9 +124,10 @@ function DTGSM_StateMachine() constructor
 		}
 		_curState = newState;
 		_curName = stateName;
-		_timeSince = 0;
-		_framesSince = 0;
-		_timeStart = get_timer();
+
+		_enterStateStartTime = get_timer();
+		_framesSince = 0;		
+		
 		_curState.onEnter();
 	}
 	
@@ -137,22 +139,17 @@ function DTGSM_StateMachine() constructor
 		return _framesSince;	
 	}
 	
-	/// @function getTime()
-	/// @desc returns the number of microseconds that have passed since 
+	/// @function getTime(sec)
+	/// @param sec returns seconds instead of microseconds
+	/// @desc returns the number of microseconds/seconds that have passed since 
 	///       we entered this state
-	static getTime = function()
+	static getTime = function(sec)
 	{
-		_timeSince = (get_timer() - _timeStart);
-		return _timeSince;
-	}
-	
-	/// @function getTimeInSeconds()
-	/// @desc returns the number of seconds that has passsed since we
-	///       entered this state
-	static getTimeInSeconds = function()
-	{
-		_timeSince = (get_timer() - _timeStart);
-		return (_timeSince/1000000);
+		var t =  (get_timer() - _enterStateStartTime);
+		if ( sec ) {
+			return (t/1000000);
+		}
+		return t
 	}
 	
 	/// @function getUserData()
@@ -186,7 +183,7 @@ function DTGSM_StateMachine() constructor
 		_curState = -1;
 		_curName = "";
 		_prevName = "";
-		_timeSince = 0;
+		_enterStateStartTime = 0;
 		_framesSince = 0;
 	}
 	
