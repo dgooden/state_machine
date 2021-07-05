@@ -57,6 +57,22 @@ state.onDraw = function()
 }
 ```
 
+Note: step and draw events are not actually tied to the step or draw event. You can run them in the begin/end events, or anywhere else for that matter.
+
+### Custom events
+You can also make custom events
+```gml
+state.addCustom("my_custom_eventname", function() {
+    // code here
+});
+```
+
+Execute that code later:
+```gml
+stateMachine.onCustom("my_custom_eventname");
+```
+The state machine needs to be in that state in order for this to work.
+
 ### User data
 
 Each state can save a simple struct (just key/value pairs, no functions, etc)
