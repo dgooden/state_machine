@@ -63,7 +63,7 @@ state.onDraw = function(obj)
 
 Note: onStep and onDraw are not actually tied to the Gamemaker step or draw events. You can run them in the begin/end events, or anywhere else for that matter.
 
-If you want to use "getFrames()" call, you must call staeMachine.step() in a step event.
+If you want to use "getFrames()" call, you must call stateMachine.step() in a step event.
 
 ### Custom events
 You can also make custom events
