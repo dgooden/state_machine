@@ -69,7 +69,7 @@ function DTGSM_State() constructor
 	{
 		if ( variable_struct_exists(_functions,functionName) ) {
 			var callback = variable_struct_get(_functions,functionName);
-			callback();
+			callback(self);
 		}
 	}
 	
@@ -162,9 +162,13 @@ function DTGSM_StateMachine() constructor
 	///@desc goes to the new state specified by stateName
 	///@param {string} stateName Name of the state
 	static goto = function(stateName) {
+		if ( stateName == _curName ) {
+			return;
+		}
+			
 		var newState = variable_struct_get(_states,stateName);
 		if ( _curState != -1 ) {
-			_curState.onExit();
+			_curState.onExit(_curState);
 			_prevName = _curName;
 		}
 		_curState = newState;
@@ -173,7 +177,7 @@ function DTGSM_StateMachine() constructor
 		_enterStateStartTime = get_timer();
 		_framesSince = 0;		
 		
-		_curState.onEnter();
+		_curState.onEnter(_curState);
 	}
 	
 	///@function getFrames()
@@ -202,7 +206,7 @@ function DTGSM_StateMachine() constructor
 	///@return {struct}
 	static getUserData = function()
 	{
-		return _curState.getUserData();
+		return (_curState != -1) ? _curState.getUserData() : {};
 	}
 	
 	///@function setUserData(data)
@@ -210,14 +214,18 @@ function DTGSM_StateMachine() constructor
 	///@param {struct} data The user data to set
 	static setUserData = function(data)
 	{
-		_curState.setUserData(data);
+		if ( _curState != -1 ) {
+			_curState.setUserData(data);
+		}
 	}
 	
 	///@function clearUserData()
 	///@desc clears the current state user data
 	static clearUserData = function(data)
 	{
-		_curState.clearUserData();
+		if ( _curState != -1 ) {
+			_curState.clearUserData();
+		}
 	}
 	
 	///@function empty()
@@ -238,15 +246,19 @@ function DTGSM_StateMachine() constructor
 	///       required if you want to use framesSince
 	static step = function()
 	{
-		++_framesSince;
-		_curState.onStep();
+		if ( _curState != -1 ) {
+			++_framesSince;
+			_curState.onStep(_curState);
+		}
 	}
 	
 	///@function draw()
 	///@desc call this every draw function (if needed)
 	static draw = function()
 	{
-		_curState.onDraw();
+		if ( _curState != -1 ) {
+			_curState.onDraw(_curState);
+		}
 	}
 	
 	///@function custom(functionName)
