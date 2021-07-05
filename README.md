@@ -18,17 +18,19 @@ stateMachine.add("start",state);
 Code to run when the state machines enters the state:
 This is called automatically.
 ```gml
-state.onEnter = function()
+state.onEnter = function(obj)
 {
     // code here
+    // obj references the State() instance    
 }
 ```
 Code to run when the state machines exits the state:
 This is called automatically
 ```gml
-state.onExit = function()
+state.onExit = function(obj)
 {
     // code here
+    // obj references the State() instance    
 }
 ```
 
@@ -39,9 +41,10 @@ stateMachine.step()
 
 Code to run each step:
 ```gml
-state.onStep = function()
+state.onStep = function(obj)
 {
     // code here
+    // obj references the State() instance    
 }
 ```
 
@@ -51,19 +54,23 @@ stateMachine.draw()
 ```
 Code to run each draw event:
 ```gml
-state.onDraw = function()
+state.onDraw = function(obj)
 {
     // code here
+    // obj references the State() instance    
 }
 ```
 
 Note: onStep and onDraw are not actually tied to the Gamemaker step or draw events. You can run them in the begin/end events, or anywhere else for that matter.
 
+If you want to use "getFrames()" call, you must call staeMachine.step() in a step event.
+
 ### Custom events
 You can also make custom events
 ```gml
-state.addCustom("my_custom_eventname", function() {
+state.addCustom("my_custom_eventname", function(obj) {
     // code here
+    // obj references the State() instance    
 });
 ```
 
@@ -75,7 +82,7 @@ The state machine needs to be in that state in order for this to work.
 
 ### User data
 
-Each state can save a simple struct (just key/value pairs, no functions, etc)
+Each state can save a struct as user data
 
 Adding user data to the current state:
 ```gml
@@ -93,7 +100,7 @@ Retrieving user data from the current state:
 userData = stateMachine.getUserData();
 ```
 
-userData would then contain the data from the foo struct.
+userData would then contain the data from the foo struct. This is a copy, not a reference, so it will be independant of the original struct.
 
 ### Time/Frames since enter state
 
