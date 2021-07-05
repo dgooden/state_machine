@@ -100,7 +100,7 @@ Retrieving user data from the current state:
 userData = stateMachine.getUserData();
 ```
 
-userData would then contain the data from the foo struct. This is a copy, not a reference, so it will be independant of the original struct.
+userData would then contain the data from the foo struct. This is a copy, not a reference, so it will be independent of the original struct.
 
 ### Time/Frames since enter state
 
