@@ -34,7 +34,7 @@ state.onExit = function()
 
 This needs to be added to your step event for the onStep events to fire:
 ```gml
-stateMachine.onStep()
+stateMachine.step()
 ```
 
 Code to run each step:
@@ -47,7 +47,7 @@ state.onStep = function()
 
 This needs to be added to yuour draw event for the onDraw events to fire:
 ```gml
-stateMachine.onDraw()
+stateMachine.draw()
 ```
 Code to run each draw event:
 ```gml
@@ -69,7 +69,7 @@ state.addCustom("my_custom_eventname", function() {
 
 Execute that code later:
 ```gml
-stateMachine.onCustom("my_custom_eventname");
+stateMachine.custom("my_custom_eventname");
 ```
 The state machine needs to be in that state in order for this to work.
 
