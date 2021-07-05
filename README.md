@@ -57,7 +57,7 @@ state.onDraw = function()
 }
 ```
 
-Note: step and draw events are not actually tied to the step or draw event. You can run them in the begin/end events, or anywhere else for that matter.
+Note: onStep and onDraw are not actually tied to the Gamemaker step or draw events. You can run them in the begin/end events, or anywhere else for that matter.
 
 ### Custom events
 You can also make custom events
