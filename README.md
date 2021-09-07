@@ -5,11 +5,11 @@ Simple GML state machine for GameMaker 2.3+
 
 #### Initialize state machine:
 ```gml
-stateMachine = new DTGSM_StateMachine();
+stateMachine = new DTG_StateMachine();
 ```
 #### Create states:
 ```gml
-state = new DTGSM_State();
+state = new DTG_State();
 // create a state named "start"
 stateMachine.add("start",state);
 ```
@@ -61,7 +61,7 @@ state.onDraw = function(obj)
 }
 ```
 
-Note: onStep and onDraw are not actually tied to the Gamemaker step or draw events. You can run them in the begin/end events, or anywhere else for that matter.
+Note: onStep and onDraw are not actually tied to the Gamemaker step or draw events. You can run them in the beginXXXX/endXXXX events.
 
 If you want to use "getFrames()" call, you must call stateMachine.step() in a step event.
 
