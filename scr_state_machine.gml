@@ -1,6 +1,6 @@
-/// @function DTGSM_State()
-/// @desc state for state machine
-function DTGSM_State() constructor 
+/// @function DTG_State()
+/// @desc state structure for state machine
+function DTG_State() constructor 
 {
 	_userData = {};
 	_functions = {};
@@ -90,9 +90,9 @@ function DTGSM_State() constructor
 	static onStep  = function() {}
 }
 
-///@function DTGSM_StateMachine()
+///@function DTG_StateMachine()
 ///@desc state machine
-function DTGSM_StateMachine() constructor 
+function DTG_StateMachine() constructor 
 {
 	_curState = -1;
 	_curName = "";
@@ -106,7 +106,7 @@ function DTGSM_StateMachine() constructor
 	///@function add(stateName,state)
 	///@desc adds state
 	///@param {string} stateName Name of the state to add
-	///@param {struct} state	  DTGSM_State() struct to add
+	///@param {struct} state	  DTG_State() struct to add
 	static add = function(stateName, state) 
 	{
 		if ( ! variable_struct_exists(_states,stateName) ) {
@@ -127,7 +127,7 @@ function DTGSM_StateMachine() constructor
 	///@function update(stateName,state)
 	///@desc updates the state
 	///@param {string} stateName Name of the state to update
-	///@param {struct} state	 DTGSM_State() struct to add
+	///@param {struct} state	 DTG_State() struct to add
 	static update = function(stateName,state) 
 	{
 		variable_struct_set(_states,stateName,state);
